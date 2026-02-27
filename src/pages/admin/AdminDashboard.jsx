@@ -20,8 +20,6 @@ export default function AdminDashboard() {
   const [message, setMessage] = useState('')
   const [editTiming, setEditTiming] = useState(null)
 
-  useEffect(() => { fetchDepartments(); fetchDoctors() }, [])
-
   const fetchDepartments = async () => {
     try { const res = await API.get('/departments'); setDepartments(res.data) }
     catch (err) { console.error(err) }
@@ -31,6 +29,8 @@ export default function AdminDashboard() {
     try { const res = await API.get('/doctors'); setDoctors(res.data) }
     catch (err) { console.error(err) }
   }
+
+  useEffect(() => { fetchDepartments(); fetchDoctors() }, [])
 
   const handleAddDepartment = async (e) => {
     e.preventDefault()
@@ -122,7 +122,6 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <div className="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
             <div className="flex justify-between items-center">
@@ -155,7 +154,6 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* Tabs */}
         <div className="flex gap-2 mb-4">
           {['departments', 'doctors'].map(tab => (
             <button key={tab} onClick={() => setActiveTab(tab)}
@@ -166,7 +164,6 @@ export default function AdminDashboard() {
           ))}
         </div>
 
-        {/* Departments Tab */}
         {activeTab === 'departments' && (
           <div className="bg-white rounded-xl shadow-sm border border-gray-100">
             <div className="p-5 flex justify-between items-center border-b">
@@ -214,7 +211,6 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        {/* Doctors Tab */}
         {activeTab === 'doctors' && (
           <div className="bg-white rounded-xl shadow-sm border border-gray-100">
             <div className="p-5 flex justify-between items-center border-b">
